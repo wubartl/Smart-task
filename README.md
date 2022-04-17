@@ -1,8 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+### `yarn install`
 
 In the project directory, you can run:
 
@@ -14,57 +10,28 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `yarn test`
+I have HTML markup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`<div contenteditable="true"><del>deleted</del> accepted <ins>inserted</ins></div>`
 
-### `yarn build`
+Part 0 CSS styles
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+a. add css styles to make "deleted" text red and "inserted" green
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Part 1 Hide / Unhide `<del>` tags when editing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+a. When clicking inside the ContentEditable, words which are inside `<del>` tags are hidden
 
-### `yarn eject`
+b. When clicking back out of the ContentEditable redisplay the words inside the `<del>` tags
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Part 2 Newly added words receive an `<ins>` tag
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+a. When adding new words inside the ContentEditable, each new word should receive an `<ins>` tag. E.g. the input text "some new text" will convert to `<ins>`some`</ins>` `<ins>`new`</ins>` `<ins>`text`</ins>`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Part 3 A tag can only contain a single word (no whitespace allowed)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+a. When whitespace is introduced inside an `<ins>` tag, split the tag into two distinct `<ins>` tags. E.g `<ins>`test`</ins>` will become `<ins>`te st`</ins>` on edit and has to be converted to `<ins>`te`</ins>` `<ins>`st`</ins>`
 
-## Learn More
+b. When adding a word in front of an `<ins>` tag, combine them as long there is no whitespace between them. E.g new`<ins>`test`</ins>` will become `<ins>`newtest`</ins>`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+c. When adding a word behind an `<ins>` tag, combine them as long there is no whitespace between them. E.g `<ins>`test`</ins>`new will become `<ins>`testnew`</ins>`
